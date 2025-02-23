@@ -1,17 +1,20 @@
 services:
   - name: renderapp
-    build:
-      dockerfile: Dockerfile
-    routes:
-      - url: /
-    port: 8080
-
-  - type: pserv
-    name: mysql
-    plan: free
+    type: web
     env: docker
-    autoDeploy: false
-    disk:
-      name: mysql
-      mountPath: /var/lib/mysql
-      sizeGB: 2
+    plan: free
+    buildCommand: ""
+    startCommand: ""
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        value: mysql://user:password@mysql:3306/dbname
+    ports:
+      - 8080
+
+databases:
+  - name: mysql
+    plan: free
+    databaseName: dbname
+    user: user
+    diskSizeGB: 2

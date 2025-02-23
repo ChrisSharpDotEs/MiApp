@@ -13,5 +13,3 @@ RUN sed -i 's/<VirtualHost \*:80>/<VirtualHost \*:8080>/' /etc/apache2/sites-ava
 RUN service apache2 restart
 
 # EXPOSE 8080
-
-CMD ["apache2", "-D", "FOREGROUND"]
