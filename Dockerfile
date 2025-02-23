@@ -1,6 +1,8 @@
 FROM php:8.2-apache
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN apt-get update && apt-get install -y libsqlite3-dev
+
+RUN docker-php-ext-install pdo pdo_sqlite
 
 COPY . /var/www/html/
 
