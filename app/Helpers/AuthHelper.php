@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["action"] == 'login') {
     $user = $auth->authorize($email, $password);
 
     if ($user) {
-        $_SESSION["usuario"] = $user;
+        $_SESSION['usuario'] = $user->email;
         $_SESSION['message']  = "!Bienvenido {$user->getName()}!";
         $_SESSION['_token'] = session_id();
         header("Location: /");

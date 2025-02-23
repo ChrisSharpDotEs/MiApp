@@ -8,7 +8,7 @@ use PDOException;
 
 class DBConnection {
     protected $conn;
-    private static $dbFile = '/var/www/html/Database/database.db';
+    private static $dbFile = './Database/database.db';
 
     public function __construct() {
         try {

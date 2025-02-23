@@ -10,9 +10,10 @@ class AuthController
     public function authorize($email, $password) {
         $user = new User($email, $password);
         $userDTO = $user->get();
-
+        
         if ($userDTO) {
-            if (password_verify($password, $userDTO['password'])) {
+            $hashAlmacenado = $userDTO['password'];
+            if (password_verify($password, $hashAlmacenado)) {
                 $user = new User($email, $password);
                 $user->name = $userDTO['name'];
                 return $user;

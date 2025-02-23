@@ -1,3 +1,7 @@
+<?php
+ $error_message = isset($_SESSION) && isset($_SESSION['error_message']) ? "<div class=\"alert alert-danger\">" . $_SESSION['error_message'] . "</div>" : $_SESSION['error_message'];
+ $_SESSION['error_message'] = null;
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,7 +16,8 @@
 </head>
 
 <body data-bs-theme="dark">
-    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+    <?= $error_message ?>
         <div class="border rounded">
             <article class="p-4">
                 <h1 class="fs-4 text-center">Iniciar sesión</h1>
