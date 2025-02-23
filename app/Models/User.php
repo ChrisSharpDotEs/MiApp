@@ -5,6 +5,7 @@ namespace MiApp\Models;
 use ErrorException;
 use Exception;
 use MiApp\Models\DBConnection;
+use PDO;
 
 class User extends DBConnection
 {
@@ -24,11 +25,16 @@ class User extends DBConnection
     {
         $usuario = $this->email;
         $password = $this->password;
-        $query = "SELECT * FROM users WHERE email = '$usuario' AND password = '$password'";
 
-        $result = $this->customQuery($query);
+        $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':email' => $usuario,
+            'password' => $password
+        ]);
+        $userDTO = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $result;
+        return $userDTO;
     }
     public function getName()
     {

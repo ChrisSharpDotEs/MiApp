@@ -3,23 +3,24 @@ namespace MiApp\Controllers;
 
 use MiApp\Models\User;
 
-class AuthController
+class AuthController 
 {
     public function __construct() {}
 
-    public function authorize($email, $password)
-    {
+    public function authorize($email, $password) {
         $user = new User($email, $password);
-        $result = $user->get();
-        
-        if(mysqli_num_rows($result) == 1) {
-            $userDTO = mysqli_fetch_assoc($result);
-            $user->name = $userDTO['name'];
-            return $user;
-        } else {
-            return null;
+        $userDTO = $user->get();
+
+        if ($userDTO) {
+            if (password_verify($password, $userDTO['password'])) {
+                $user = new User($email, $password);
+                $user->name = $userDTO['name'];
+                return $user;
+            }
         }
+        return null;
     }
+
     public function logout() {
         session_destroy();
         header("Location: /");

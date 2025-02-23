@@ -21,16 +21,6 @@ class DBConnection {
         }
     }
 
-    public function customQuery($query) {
-        try {
-            $result = $this->conn->query($query);
-            return $result;
-        } catch (PDOException $e) {
-            echo "Error en la consulta: " . $e->getMessage() . "<br>";
-            return false;
-        }
-    }
-
     public function close() {
         $this->conn = null;
     }
