@@ -3,41 +3,35 @@
 namespace MiApp\Models;
 
 use Exception;
+use PDO;
+use PDOException;
 
-class DBConnection
-{
+class DBConnection {
     protected $conn;
+    private static $dbFile = '/var/www/html/Database/database.db';
 
-    public function __construct()
-    {
-        $host = getenv('DB_HOST');
-        $database = getenv('DB_DATABASE');
-        $username = getenv('DB_USERNAME');
-        $password = getenv('DB_PASSWORD');
-        $this->conn = mysqli_connect($host, $username, $password, $database);
-        
-        if ($this->conn->connect_error) {
-            echo "Error de conexión: " . $this->conn->connect_error . "<br>";
-            echo "Host: " . $host . "<br>";
-            echo "Database: " . $database . "<br>";
-            echo "Username: " . $username . "<br>";
-            exit; // Detén la ejecución para ver el error
-        }
-    }
-    public function query($query)
-    {
+    public function __construct() {
         try {
-            $result = mysqli_query($this->conn, $query);
-            $this->close();
-            return $result;
-        } catch (Exception $e){
-            $this->close();
-            return $e;
+            $this->conn = new PDO('sqlite:' . DBConnection::$dbFile);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo 'Error de conexión: ' . $e->getMessage() . "<br>";
+            echo "Ruta al archivo: " . DBConnection::$dbFile . "<br>";
+            exit;
         }
-        
     }
-    public function close()
-    {
-        mysqli_close($this->conn);
+
+    public function customQuery($query) {
+        try {
+            $result = $this->conn->query($query);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage() . "<br>";
+            return false;
+        }
+    }
+
+    public function close() {
+        $this->conn = null;
     }
 }

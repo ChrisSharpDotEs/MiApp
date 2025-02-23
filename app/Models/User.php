@@ -26,7 +26,7 @@ class User extends DBConnection
         $password = $this->password;
         $query = "SELECT * FROM users WHERE email = '$usuario' AND password = '$password'";
 
-        $result = $this->query($query);
+        $result = $this->customQuery($query);
 
         return $result;
     }

@@ -2,8 +2,9 @@
 session_start();
 require_once 'vendor/autoload.php';
 
+
 $uri = $_SERVER['REQUEST_URI'];
-$ruta = trim($uri, '/'); // Elimina las barras diagonales
+$ruta = trim($uri, '/');
 
 if ($ruta == 'login') {
     include './public/views/login.php';
