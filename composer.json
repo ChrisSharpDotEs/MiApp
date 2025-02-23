@@ -1,0 +1,19 @@
+{
+    "name": "cristian/miphpapp",
+    "description": "A basic PHP aplications",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "MiApp\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Cristian",
+            "email": "82599146+ChrisSharpDotEs@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
