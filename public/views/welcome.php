@@ -1,7 +1,7 @@
 <?php
 function isLogged()
 {
-    return isset($_SESSION) && isset($_SESSION["usuario"]);
+    return isset($_SESSION) && array_key_exists('usuario', $_SESSION);
 }
 if (isLogged()) {
     $loginMessage =
