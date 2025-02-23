@@ -10,7 +10,11 @@ class DBConnection
 
     public function __construct()
     {
-        $this->conn = mysqli_connect("db", "invitado", "4aabcdE1f3A", "renderapp");
+        $host = getenv('DB_HOST');
+        $database = getenv('DB_DATABASE');
+        $username = getenv('DB_USERNAME');
+        $password = getenv('DB_PASSWORD');
+        $this->conn = mysqli_connect($host, $username, $password, $database);
         
         if (!$this->conn) {
             die("Error al conectar a la base de datos: " . mysqli_connect_error());
