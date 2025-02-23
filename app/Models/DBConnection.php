@@ -16,8 +16,12 @@ class DBConnection
         $password = getenv('DB_PASSWORD');
         $this->conn = mysqli_connect($host, $username, $password, $database);
         
-        if (!$this->conn) {
-            die("Error al conectar a la base de datos: " . mysqli_connect_error());
+        if ($this->conn->connect_error) {
+            echo "Error de conexión: " . $this->conn->connect_error . "<br>";
+            echo "Host: " . $host . "<br>";
+            echo "Database: " . $database . "<br>";
+            echo "Username: " . $username . "<br>";
+            exit; // Detén la ejecución para ver el error
         }
     }
     public function query($query)

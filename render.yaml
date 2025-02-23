@@ -1,23 +1,17 @@
 services:
-  - name: tu-nombre-de-servicio  # Reemplaza con un nombre para tu servicio
+  - name: renderapp
     build:
-      dockerfile: Dockerfile # Asegúrate de que este es el nombre de tu Dockerfile
+      dockerfile: Dockerfile
     routes:
-      - url: / # La URL a la que se accederá a tu aplicación
-    port: 8080 # El puerto que tu aplicación escucha dentro del contenedor
-    envVars: # Variables de entorno
-      - name: DB_HOST
-        value: ${DB_HOST} # Definir estas variables en la configuración de Render
-      - name: DB_DATABASE
-        value: ${DB_DATABASE}
-      - name: DB_USERNAME
-        value: ${DB_USERNAME}
-      - name: DB_PASSWORD
-        value: ${DB_PASSWORD}
-    databases: # Configuración de la base de datos (Render gestionará la base de datos)
-      - name: mysql-db # Nombre del servicio de base de datos
-        plan: Free # Elige un plan (Free, Starter, etc.)
-        database: mysql # Tipo de base de datos
-        user: invitado # Usuario de la base de datos
-        password: 4aabcdE1f3A # Contraseña de la base de datos
-        name: renderapp # Nombre de la base de datos
+      - url: /
+    port: 8080
+
+  - type: pserv
+    name: mysql
+    plan: free
+    env: docker
+    autoDeploy: false
+    disk:
+      name: mysql
+      mountPath: /var/lib/mysql
+      sizeGB: 2
