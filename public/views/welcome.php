@@ -149,6 +149,27 @@ if (!isLogged()) {
             </div>
         </div>
     </footer>
+    <div class="bg-warning">
+        <?php
+        $url = getenv("DATABASE_URL");
+        $parts = parse_url($url);
+
+        $host = $parts["host"];
+        $user = $parts["user"];
+        $pass = $parts["pass"];
+        $dbname = ltrim($parts["path"], '/');
+        $port = $parts["port"] ?? 3306;
+
+        $conn = new mysqli($host, $user, $pass, $dbname, $port);
+
+        if ($conn->connect_error) {
+            die("Error de conexión: " . $conn->connect_error);
+        } else {
+            echo "Conexión exitosa";
+        }
+        ?>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
