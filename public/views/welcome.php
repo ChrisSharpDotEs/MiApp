@@ -8,7 +8,6 @@ function isFirstLoggin() {
 }
 if (isLogged()) {
     if(isFirstLoggin()) {
-        var_dump(isFirstLoggin());
         $loginMessage =
         "<div class=\"container\">
             <div class=\"d-flex justify-content-between alert alert-success\" role=\"alert\">
