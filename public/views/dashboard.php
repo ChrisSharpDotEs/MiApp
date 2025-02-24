@@ -8,7 +8,6 @@ function isFirstLoggin() {
 }
 if (isLogged()) {
     if(isFirstLoggin()) {
-        var_dump(isFirstLoggin());
         $loginMessage =
         "<div class=\"container\">
             <div class=\"d-flex justify-content-between alert alert-success\" role=\"alert\">
@@ -112,7 +111,7 @@ if (!isLogged()) {
                                 <li class="nav-item">
                                     <a class="nav-link active border-bottom" href="/" aria-current="page" data-path-item="/">Home</a>
                                 </li>
-                                <?= $dashboardLink ?? ''?>
+                                <?= $dashboardLink ?? '' ?>
                             </ul>
                             <?= $logoutForm ?? ''; ?>
                         </div>
@@ -121,14 +120,8 @@ if (!isLogged()) {
             </header>
             <?= $loginMessage ?? ''; ?>
             <section class="text-center py-5 text-light">
-                <h1 class="display-1">¡Bienvenido!</h1>
-                <p>Esta es mi aplicación de PHP</p>
-                <?= $loginButton ?? '' ?>
-                <div class="py-5">
-                    <p>
-                        Esta aplicación solo es una muestra simple de mis conocimientos en PHP y JavaScript.
-                    </p>
-                </div>
+                <h1 class="display-1">Panel de control</h1>
+                
             </section>
         </div>
     </main>

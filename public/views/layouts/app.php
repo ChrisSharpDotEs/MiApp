@@ -3,13 +3,8 @@ function isLogged()
 {
     return isset($_SESSION) && array_key_exists('usuario', $_SESSION);
 }
-function isFirstLoggin() {
-    return isset($_SESSION) && array_key_exists('message', $_SESSION);
-}
 if (isLogged()) {
-    if(isFirstLoggin()) {
-        var_dump(isFirstLoggin());
-        $loginMessage =
+    $loginMessage =
         "<div class=\"container\">
             <div class=\"d-flex justify-content-between alert alert-success\" role=\"alert\">
                 <div>
@@ -20,8 +15,6 @@ if (isLogged()) {
                 <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
             </div>
         </div>";
-        unset($_SESSION['message']);
-    }
 
     $token = $_SESSION["_token"];
     $logoutForm =
@@ -30,10 +23,6 @@ if (isLogged()) {
         <input type=\"hidden\" name=\"_token\" value=\"$token\" hidden >
         <button type=\"submit\" class=\"btn btn-outline-light rounded-0\">Cerrar Sesión</button>
     </form>";
-    $dashboardLink = 
-    "<li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/dashboard\" data-path-item=\"/dashboard\">Dashboard</a>
-    </li>";
 }
 
 if (!isLogged()) {
@@ -54,7 +43,8 @@ if (!isLogged()) {
 </head>
 
 <body data-bs-theme="dark" style="background-color: #111;">
-    <div class="modal-container">
+    <div class=" d-none modals-container">
+
         <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered"
                 role="document">
@@ -86,8 +76,8 @@ if (!isLogged()) {
                             <a href="/politica-de-cookies">Política de Cookies</a>.
                             </p>
                             <div class="d-flex justify-content-between gap-2">
-                                <button id="accept-cookies" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Aceptar todas</button>
-                                <button id="reject-cookies" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Rechazar todas</button>
+                                <button class="btn btn-primary rounded-0" data-bs-dismiss="modal">Aceptar todas</button>
+                                <button class="btn btn-primary rounded-0" data-bs-dismiss="modal">Rechazar todas</button>
                                 <button class="btn btn-primary rounded-0 d-none" data-bs-dismiss="modal">Configurar</button>
                             </div>
                         </div>
@@ -97,40 +87,7 @@ if (!isLogged()) {
         </div>
     </div>
     <main>
-        <div class="jumbotron">
-            <header>
-                <nav class="navbar navbar-expand-sm bg-transparent">
-                    <div class="container">
-                        <a class="navbar-brand" href="#">RenderApp</a>
-                        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="collapsibleNavId">
-                            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active border-bottom" href="/" aria-current="page" data-path-item="/">Home</a>
-                                </li>
-                                <?= $dashboardLink ?? ''?>
-                            </ul>
-                            <?= $logoutForm ?? ''; ?>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-            <?= $loginMessage ?? ''; ?>
-            <section class="text-center py-5 text-light">
-                <h1 class="display-1">¡Bienvenido!</h1>
-                <p>Esta es mi aplicación de PHP</p>
-                <?= $loginButton ?? '' ?>
-                <div class="py-5">
-                    <p>
-                        Esta aplicación solo es una muestra simple de mis conocimientos en PHP y JavaScript.
-                    </p>
-                </div>
-            </section>
-        </div>
+        
     </main>
     <footer class="bg-dark py-3">
         <div class="container-fluid">

@@ -2,14 +2,14 @@
 
 class DBConnection {
     protected $conn;
-    private static $dbFile = __DIR__ . '/../Database/database.db'; // Ruta relativa desde el directorio del script
+    private static $dbFile = __DIR__ . '/../Database/database.db';
 
     public function __construct() {
         try {
-            $this->conn = new PDO('sqlite:' . self::$dbFile); // self:: para acceder a la propiedad estática
+            $this->conn = new PDO('sqlite:' . self::$dbFile);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            die('Error de conexión: ' . $e->getMessage() . "<br>Ruta al archivo: " . self::$dbFile); // die() para detener la ejecución
+            die('Error de conexión: ' . $e->getMessage() . "<br>Ruta al archivo: " . self::$dbFile);
         }
     }
 
@@ -33,7 +33,7 @@ class BuildDataBase extends DBConnection {
 
     public function __construct() {
         parent::__construct();
-        $this->db = $this; // $this en lugar de new DBConnection()
+        $this->db = $this;
     }
 
     public function execute() {

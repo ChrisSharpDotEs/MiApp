@@ -12,6 +12,10 @@ if ($ruta == 'login') {
     include './app/Helpers/AuthHelper.php';
 } elseif ($ruta == '' ) {
     include './public/views/welcome.php';
+} elseif($ruta == 'politica-de-cookies') {
+    include './public/views/cookypolicy.php';
+} elseif($ruta == 'dashboard') {
+    include './public/views/dashboard.php';
 } else {
     include './public/views/notfound.php';
      // Página principal por defecto

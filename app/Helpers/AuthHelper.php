@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["action"] == 'login') {
 
     if ($user) {
         $_SESSION['usuario'] = $user->email;
-        $_SESSION['message']  = "!Bienvenido {$user->getName()}!";
+        $_SESSION['message']  = "¡Bienvenido {$user->getName()}!";
         $_SESSION['_token'] = session_id();
         header("Location: /");
         exit();
