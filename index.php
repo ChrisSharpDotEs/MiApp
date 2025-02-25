@@ -47,4 +47,4 @@ if ($ruta == 'login') {
 } else {
     include './public/views/notfound.php';
 }
-if($page) include './public/views/layouts/app.php';
+if(isset($page)) include './public/views/layouts/app.php';

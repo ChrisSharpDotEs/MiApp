@@ -54,22 +54,24 @@
             </div>
         </div>
     </div>
-    <main class="jumbotron">
-        <?php include("./public/views/components/navigation.php"); ?>
-        <?= $loginMessage ?? ''; ?>
-        <?php include("./public/views/pages/$page.php"); ?>
-    </main>
-    <footer class="bg-dark py-3">
-        <div class="container-fluid">
-            <div class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4 border-top">
-                <div class="p-2">
-                    <a href="/" class="text-decoration-none text-light">
-                        <span class="">© 2025 MiApp, Test</span>
-                    </a>
+    <div class="d-flex flex-column justify-content-between">
+        <main class="jumbotron">
+            <?php include("./public/views/components/navigation.php"); ?>
+            <?= $loginMessage ?? ''; ?>
+            <?php include("./public/views/pages/$page.php"); ?>
+        </main>
+        <footer class="bg-dark py-3">
+            <div class="container-fluid">
+                <div class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4 border-top">
+                    <div class="p-2">
+                        <a href="/" class="text-decoration-none text-light">
+                            <span class="">© 2025 MiApp, Test</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
     <script src="./public/js/app.js" type="module"></script>
 </body>
 
