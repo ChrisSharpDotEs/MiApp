@@ -14,22 +14,23 @@ class User extends DBConnection
     public string $lastname;
     public string $password;
     public string $email;
+    public string $token;
 
-    public function __construct($email, $password)
+    public function __construct()
     {
         parent::__construct();
+    }
+    public function get($email, $password)
+    {
         $this->email = $email;
         $this->password = $password;
-    }
-    public function get()
-    {
-        $usuario = $this->email;
 
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([':email' => $usuario]);
+        $stmt->execute([':email' => $this->email]);
 
         $userDTO = $stmt->fetch(PDO::FETCH_ASSOC);
+        $this->close();
 
         return $userDTO;
     }

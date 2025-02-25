@@ -1,41 +1,10 @@
-<?php
-function isLogged()
-{
-    return isset($_SESSION) && array_key_exists('usuario', $_SESSION);
-}
-if (isLogged()) {
-    $loginMessage =
-        "<div class=\"container\">
-            <div class=\"d-flex justify-content-between alert alert-success\" role=\"alert\">
-                <div>
-                    <div>
-                        " . $_SESSION['message'] . "
-                    </div>
-                </div>
-                <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
-            </div>
-        </div>";
-
-    $token = $_SESSION["_token"];
-    $logoutForm =
-        "<form action=\"/auth\" method=\"post\">
-        <input type=\"hidden\" name=\"action\" value=\"logout\" hidden >
-        <input type=\"hidden\" name=\"_token\" value=\"$token\" hidden >
-        <button type=\"submit\" class=\"btn btn-outline-light rounded-0\">Cerrar Sesión</button>
-    </form>";
-}
-
-if (!isLogged()) {
-    $loginButton = "<div><a href=\"/login\" class=\"btn btn-primary rounded-0 p-3\">Comenzar</a></div>";
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RenderApp | Home</title>
+    <title><?= $title ?? '' ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <link rel="shortcut icon" href="#" type="image/x-icon">
@@ -43,8 +12,7 @@ if (!isLogged()) {
 </head>
 
 <body data-bs-theme="dark" style="background-color: #111;">
-    <div class=" d-none modals-container">
-
+    <div class="modal-container">
         <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered"
                 role="document">
@@ -76,8 +44,8 @@ if (!isLogged()) {
                             <a href="/politica-de-cookies">Política de Cookies</a>.
                             </p>
                             <div class="d-flex justify-content-between gap-2">
-                                <button class="btn btn-primary rounded-0" data-bs-dismiss="modal">Aceptar todas</button>
-                                <button class="btn btn-primary rounded-0" data-bs-dismiss="modal">Rechazar todas</button>
+                                <button id="accept-cookies" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Aceptar todas</button>
+                                <button id="reject-cookies" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Rechazar todas</button>
                                 <button class="btn btn-primary rounded-0 d-none" data-bs-dismiss="modal">Configurar</button>
                             </div>
                         </div>
@@ -86,8 +54,10 @@ if (!isLogged()) {
             </div>
         </div>
     </div>
-    <main>
-        
+    <main class="jumbotron">
+        <?php include("./public/views/components/navigation.php"); ?>
+        <?= $loginMessage ?? ''; ?>
+        <?php include("./public/views/pages/$page.php"); ?>
     </main>
     <footer class="bg-dark py-3">
         <div class="container-fluid">

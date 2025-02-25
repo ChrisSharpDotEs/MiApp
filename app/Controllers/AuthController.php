@@ -8,14 +8,17 @@ class AuthController
     public function __construct() {}
 
     public function authorize($email, $password) {
-        $user = new User($email, $password);
-        $userDTO = $user->get();
+        $user = new User();
+        $userDTO = $user->get($email, $password);
         
         if ($userDTO) {
             $hashAlmacenado = $userDTO['password'];
             if (password_verify($password, $hashAlmacenado)) {
                 $user = new User($email, $password);
+                $user->id = $userDTO['id'];
                 $user->name = $userDTO['name'];
+                $user->email = $userDTO['email'];
+                $user->token = $this->generateToken();
                 return $user;
             }
         }
@@ -26,5 +29,10 @@ class AuthController
         session_destroy();
         header("Location: /");
         exit();
+    }
+
+    private function generateToken()
+    {
+        return bin2hex(random_bytes(32));
     }
 }

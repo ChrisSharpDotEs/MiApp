@@ -11,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["action"] == 'login') {
 
     if ($user) {
         $_SESSION['usuario'] = $user->email;
+        $_SESSION['_token'] = $user->token;
         $_SESSION['message']  = "¡Bienvenido {$user->getName()}!";
-        $_SESSION['_token'] = session_id();
         header("Location: /");
         exit();
     } else {
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["action"] == 'login') {
         header("Location: /login");
         exit();
     }
-} else if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["action"] == 'logout') {
+} else if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["action"] == 'logout' && $_POST["_token"] == $_SESSION["_token"]) {
     $auth = new AuthController();
     $auth->logout();
 }
