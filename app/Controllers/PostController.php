@@ -1,7 +1,7 @@
 <?php
 namespace MiApp\Controllers;
 
-use MiApp\Models\User;
+use MiApp\Models\Post;
 
 class PostController extends BaseController
 {
@@ -21,23 +21,9 @@ class PostController extends BaseController
         }
     }
     public function all() {
-        $posts = [
-            (object) [
-                "img" => "./public/img/benijo.webp",
-                "title" => "Post de ejemplo 1",
-                "description" => "Breve descripción de ejemplo"
-            ],
-            (object) [
-                "img" => "./public/img/benijo.webp",
-                "title" => "Post de ejemplo 2",
-                "description" => "Breve descripción de ejemplo"
-            ],
-            (object) [
-                "img" => "./public/img/benijo.webp",
-                "title" => "Post de ejemplo 3",
-                "description" => "Breve descripción de ejemplo"
-            ]
-        ];
+        $userpost = new Post($_SESSION['user_id']);
+        $posts = $userpost->all();
+        
         return $posts;
     }
 }

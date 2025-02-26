@@ -7,10 +7,12 @@
                 <?php foreach ($posts as $post): ?>
                     <div class="col-md-4">
                         <div class="post-panel">
-                            <img class="img-fluid" src="<?= htmlspecialchars($post->img) ?>" alt="Imagen de <?= htmlspecialchars($post->title) ?>">
+                            <?php if($post['img_url'] != '' || $post['img_url'] != NULL): ?>
+                            <img class="img-fluid" src="<?= htmlspecialchars($post['img_url']) ?>" alt="Imagen de <?= htmlspecialchars($post['title']) ?>">
+                            <?php endif ?>
                             <div class="py-3">
-                                <h3><?= htmlspecialchars($post->title) ?></h3>
-                                <p><?= htmlspecialchars($post->description) ?></p>
+                                <h3><?= htmlspecialchars($post['title']) ?></h3>
+                                <p><?= htmlspecialchars($post['description']) ?></p>
                             </div>
                         </div>
                     </div>

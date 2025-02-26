@@ -24,23 +24,21 @@ class AuthController extends BaseController
 
         $user = new User();
         $userDTO = $user->get($email, $password);
+        $user = User::getUser($userDTO);
         
         if ($userDTO) {
             $hashAlmacenado = $userDTO['password'];
             if (password_verify($password, $hashAlmacenado)) {
-                $user = new User($email, $password);
-                $user->id = $userDTO['id'];
-                $user->name = $userDTO['name'];
-                $user->email = $userDTO['email'];
-                $user->token = $this->generateToken();
                 $data = [
                     "title" => "MiApp | Home",
                     "page" => "welcome",
-                    "message" => "¡Bienvenido " . $user->name . "!"
+                    "message" => "¡Bienvenido " . $userDTO['name'] . "!"
                 ];
                 $_SESSION['data'] = $data;
+                $_SESSION['user_id'] = $userDTO['id'];
                 $_SESSION['_token'] = bin2hex(random_bytes(32));
 
+                $user->setToken($_SESSION['_token']);
                 header('Location: /');
                 exit();
             }
