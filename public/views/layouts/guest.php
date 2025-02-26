@@ -9,7 +9,6 @@ if (isset($_SESSION) && array_key_exists('error_message', $_SESSION)) {
     $error_message = "<div class=\"alert alert-danger\">" . $_SESSION['error_message'] . "</div>";
     session_destroy();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,7 +30,8 @@ if (isset($_SESSION) && array_key_exists('error_message', $_SESSION)) {
             <article class="p-4">
                 <h1 class="fs-4 text-center"><?= $appName ?></h1>
                 <form action="/auth" method="post">
-                    <input type="text" hidden value="login" name="action">
+                    <input type="hidden" name="_token" value="<?= session_id() ?>" hidden>
+                    <input type="text" name="login" value="true" hidden>
                     <div class="mb-3">
                         <label for="emailId" class="form-label">Email</label>
                         <input type="email" class="form-control shadow-sm" name="email" id="emailId" placeholder="abc@mail.com" autocomplete="email" required />

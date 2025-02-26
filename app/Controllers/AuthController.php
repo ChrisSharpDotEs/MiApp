@@ -7,10 +7,21 @@ class AuthController extends BaseController
 {
     public function __construct() {}
     public function index(){
-        return $this->view("/pages/login");
+        if (isset($_SESSION) && array_key_exists('_token', $_SESSION)) {
+            header('Location: /');
+            exit;
+        } else {
+            $data = [
+                "title" => "MiApp | Home"
+            ];
+            return $this->view("/layouts/guest", $data);
+        }
     }
 
-    public function authorize($email, $password) {
+    public function authorize($request) {
+        $email = $request['email'];
+        $password = $request['password'];
+
         $user = new User();
         $userDTO = $user->get($email, $password);
         
@@ -22,7 +33,16 @@ class AuthController extends BaseController
                 $user->name = $userDTO['name'];
                 $user->email = $userDTO['email'];
                 $user->token = $this->generateToken();
-                return $user;
+                $data = [
+                    "title" => "MiApp | Home",
+                    "page" => "welcome",
+                    "message" => "¡Bienvenido " . $user->name . "!"
+                ];
+                $_SESSION['data'] = $data;
+                $_SESSION['_token'] = bin2hex(random_bytes(32));
+
+                header('Location: /');
+                exit();
             }
         }
         return null;

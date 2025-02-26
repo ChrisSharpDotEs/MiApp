@@ -12,16 +12,24 @@
                     <li class="nav-item">
                         <a class="nav-link active border-bottom" href="/" aria-current="page" data-path-item="/">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/otro" data-path-item="/otro">Not Found</a>
+                    </li>
+                    <?php if (isset($_SESSION) && array_key_exists("_token", $_SESSION)): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard" data-path-item="/dashboard">Dashboard</a>
+                        </li>
+                    <?php endif ?>
                     <?= $dashboardLink ?? '' ?>
                 </ul>
                 <?= $logoutForm ?? ''; ?>
                 <?php if (isset($_SESSION['_token'])): ?>
-                    <form action="/auth" method="post">
+                    <form action="/logout" method="post">
                         <input type="hidden" name="action" value="logout" hidden>
                         <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>" hidden>
                         <button type="submit" class="btn btn-outline-light rounded-0">Cerrar Sesión</button>
-                    <?php endif ?>
                     </form>
+                <?php endif ?>
             </div>
         </div>
     </nav>

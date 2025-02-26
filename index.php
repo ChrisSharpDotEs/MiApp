@@ -13,13 +13,30 @@ $routes = [
         "GET" => "index"
     ],
     "/login" => [
-        "controller" => "WebController",
-        "GET" => "login"
+        "controller" => "AuthController",
+        "GET" => "index",
+        "POST" => "authorize"
+    ],
+    "/auth" => [
+        "controller" => "AuthController",
+        "POST" => "authorize"
+    ],
+    "/logout" => [
+        "controller" => "AuthController",
+        "POST" => "logout"
+    ],
+    "/dashboard" => [
+        "controller" => "PostController",
+        "GET" => "index"
     ]
 ];
-if(array_key_exists($request, $routes)) {
+if (array_key_exists($request, $routes)) {
     $controller = $routes[$request]['controller'];
     $action = $routes[$request][$method];
+
+    if (isset($_POST) && array_key_exists('login', $_POST)) {
+        $params = $_POST;
+    }
 } else {
     $controller = "WebController";
     $action = "notfound";
@@ -33,4 +50,4 @@ $controllerName = "MiApp\\Controllers\\$controllerName";
 
 $controller = new $controllerName();
 
-$controller->$action();
+$controller->$action($params ?? NULL);

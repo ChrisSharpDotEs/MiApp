@@ -57,7 +57,18 @@
     <div class="d-flex flex-column justify-content-between">
         <main class="jumbotron">
             <?php include("./public/views/components/navigation.php"); ?>
-            <?= $loginMessage ?? ''; ?>
+            <?php if (isset($message)): ?>
+                <div class="container">
+                    <div class="d-flex justify-content-between alert alert-success my-4" role="alert">
+                        <div>
+                            <div>
+                                <?= $message ?? '' ?>
+                            </div>
+                        </div>
+                        <button class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                </div>
+            <?php endif ?>
             <?php include("./public/views/pages/$page.php"); ?>
         </main>
         <footer class="bg-dark py-3">
