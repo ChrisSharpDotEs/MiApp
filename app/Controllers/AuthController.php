@@ -1,4 +1,5 @@
 <?php
+
 namespace MiApp\Controllers;
 
 use MiApp\Models\User;
@@ -6,7 +7,8 @@ use MiApp\Models\User;
 class AuthController extends BaseController
 {
     public function __construct() {}
-    public function index(){
+    public function index()
+    {
         if (isset($_SESSION) && array_key_exists('_token', $_SESSION)) {
             header('Location: /');
             exit;
@@ -18,13 +20,14 @@ class AuthController extends BaseController
         }
     }
 
-    public function authorize($request) {
+    public function authorize($request)
+    {
         $email = $request['email'];
         $password = $request['password'];
 
         $user = new User();
         $userDTO = $user->get($email, $password);
-        
+
         if ($userDTO) {
             $user = User::getUser($userDTO);
             $hashAlmacenado = $userDTO['password'];
@@ -41,6 +44,10 @@ class AuthController extends BaseController
                 $user->setToken($_SESSION['_token']);
                 header('Location: /');
                 exit();
+            } else {
+                $_SESSION['error_message'] = "Datos incorrectos.";
+                header('Location: /login');
+                exit();
             }
         } else {
             $_SESSION['error_message'] = "Ha ocurrido un error inesperado";
@@ -49,7 +56,8 @@ class AuthController extends BaseController
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_destroy();
         header("Location: /");
         exit();

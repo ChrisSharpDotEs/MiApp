@@ -54,11 +54,11 @@ class BuildDataBase extends DBConnection
 
     private function dropDatabase()
     {
-        $sql = "DROP TABLE users ";
+        $sql = "DROP TABLE IF EXISTS users";
         if ($this->db->customQuery($sql)) {
             echo "Table users deleted.";
         }
-        $sql = "DROP TABLE posts ";
+        $sql = "DROP TABLE IF EXISTS posts";
         if ($this->db->customQuery($sql)) {
             echo "Table posts deleted.";
         }
