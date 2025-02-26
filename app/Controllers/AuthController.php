@@ -24,9 +24,9 @@ class AuthController extends BaseController
 
         $user = new User();
         $userDTO = $user->get($email, $password);
-        $user = User::getUser($userDTO);
         
         if ($userDTO) {
+            $user = User::getUser($userDTO);
             $hashAlmacenado = $userDTO['password'];
             if (password_verify($password, $hashAlmacenado)) {
                 $data = [
@@ -42,8 +42,11 @@ class AuthController extends BaseController
                 header('Location: /');
                 exit();
             }
+        } else {
+            $_SESSION['error_message'] = "Ha ocurrido un error inesperado";
+            header('Location: /login');
+            exit();
         }
-        return null;
     }
 
     public function logout() {

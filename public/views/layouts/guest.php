@@ -36,12 +36,12 @@ if (isset($_SESSION) && array_key_exists('error_message', $_SESSION)) {
                         <label for="emailId" class="form-label">Email</label>
                         <input type="email" class="form-control shadow-sm" name="email" id="emailId" placeholder="abc@mail.com" autocomplete="email" required />
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-5">
                         <label for="passwordId" class="form-label">Contraseña</label>
                         <input type="password" class="form-control shadow-sm" name="password" id="passwordId" autocomplete="current-password" required />
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+                        <button class="btn btn-primary rounded-0 w-100" type="submit">Iniciar sesión</button>
                     </div>
                 </form>
             </article>

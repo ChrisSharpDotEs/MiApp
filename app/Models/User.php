@@ -24,17 +24,31 @@ class User extends DBConnection
     public function get($email, $password)
     {
         //TO-DO: the instance holds the user data
-        $this->email = $email;
-        $this->password = $password;
-
-        $sql = "SELECT * FROM users WHERE email = :email";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([':email' => $this->email]);
-
-        $userDTO = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->close();
-
-        return $userDTO;
+        try {
+            $this->email = $email;
+            $this->password = $password;
+    
+            $sql = "SELECT * FROM users WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':email' => $this->email]);
+    
+            $userDTO = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($userDTO) {
+              $this->close();
+              return $userDTO;
+            } else {
+                $this->close();
+                return null;
+            }
+    
+        } catch (PDOException $e) {
+            $this->close();
+            return null;
+        } catch (Exception $e) {
+            $this->close();
+            return null;
+        }
     }
     public static function getUser($userDTO)
     {
