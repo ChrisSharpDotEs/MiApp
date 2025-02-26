@@ -135,7 +135,7 @@ class BuildDataBase extends DBConnection
     {
         $sql = "INSERT INTO posts (id_user, title, description, img_url) VALUES
             (1, 'Mi primer post', 'Este es el contenido de mi primer post.', './public/img/benijo.webp'),
-            (1, 'Un post interesante', 'Aquí hay información relevante sobre un tema.', NULL),
+            (1, 'Un post interesante', 'Aquí hay información relevante sobre un tema.', './public/img/developer.webp'),
             (1, 'Otro post más', 'Solo para probar que puedo insertar varios posts.', './public/img/teide.webp');";
 
         if ($this->db->customQuery($sql)) {
