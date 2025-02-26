@@ -1,4 +1,3 @@
-<?= $loginMessage ?? ''; ?>
 <section class="container py-5">
     <h1 class="fs-4">Panel de control</h1>
     <hr>

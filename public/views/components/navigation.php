@@ -15,6 +15,13 @@
                     <?= $dashboardLink ?? '' ?>
                 </ul>
                 <?= $logoutForm ?? ''; ?>
+                <?php if (isset($_SESSION['_token'])): ?>
+                    <form action="/auth" method="post">
+                        <input type="hidden" name="action" value="logout" hidden>
+                        <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>" hidden>
+                        <button type="submit" class="btn btn-outline-light rounded-0">Cerrar Sesión</button>
+                    <?php endif ?>
+                    </form>
             </div>
         </div>
     </nav>

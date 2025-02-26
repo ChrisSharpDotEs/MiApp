@@ -3,9 +3,12 @@ namespace MiApp\Controllers;
 
 use MiApp\Models\User;
 
-class AuthController 
+class AuthController extends BaseController
 {
     public function __construct() {}
+    public function index(){
+        return $this->view("/pages/login");
+    }
 
     public function authorize($email, $password) {
         $user = new User();

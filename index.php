@@ -1,50 +1,36 @@
 <?php
-
-use MiApp\Controllers\PostController;
-
-//TO-DO Refactorizar
-
 session_start();
+
 require_once 'vendor/autoload.php';
-require_once './app/Helpers/AuthManager.php';
-require_once './app/Controllers/PostController.php';
 
-$appName = "MiApp";
+$request = $_SERVER['REQUEST_URI'];
 
-$authManager = new AuthManager();
+$method = $_SERVER['REQUEST_METHOD'];
 
-
-$loginMessage = $authManager->getLoginMessage();
-$token = $authManager->getToken();
-$logoutForm = $authManager->getLogoutForm();
-$dashboardLink = $authManager->getDashboardLink();
-$loginButton = $authManager->getLoginButton();
-
-$uri = $_SERVER['REQUEST_URI'];
-$ruta = trim($uri, '/');
 $routes = [
-    "login" => "login"
+    "/" => [
+        "controller" => "WebController",
+        "GET" => "index"
+    ],
+    "/login" => [
+        "controller" => "WebController",
+        "GET" => "login"
+    ]
 ];
-
-if ($ruta == 'login') {
-    $title = "$appName | Sign in";
-    include './public/views/layouts/guest.php';
-} elseif ($ruta == 'auth'){
-    include './app/Helpers/AuthHelper.php';
-} elseif ($ruta == '' ) {
-    $title = "$appName | Home";
-    $page = "welcome";
-} elseif($ruta == 'politica-de-cookies') {
-    $title = "$appName | Cookies";
-    $page = "cookiepolicy";
-} elseif($ruta == 'dashboard') {
-    
-    $pc = new PostController();
-    $posts = $pc->all();
-    
-    $title = "$appName | Posts";
-    $page = "dashboard";
+if(array_key_exists($request, $routes)) {
+    $controller = $routes[$request]['controller'];
+    $action = $routes[$request][$method];
 } else {
-    include './public/views/notfound.php';
+    $controller = "WebController";
+    $action = "notfound";
 }
-if(isset($page)) include './public/views/layouts/app.php';
+
+$controllerName = ucfirst($controller);
+
+include('./app/Controllers/' . $controllerName . '.php');
+
+$controllerName = "MiApp\\Controllers\\$controllerName";
+
+$controller = new $controllerName();
+
+$controller->$action();
