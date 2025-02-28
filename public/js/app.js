@@ -12,7 +12,7 @@ class CookieModalManager {
     }
     setCookie(cookieName) {
         let fechaExpiracion = new Date();
-        fechaExpiracion.setDate(fechaExpiracion.getDate() + 15);
+        fechaExpiracion.setMinutes(fechaExpiracion.getMinutes() + 30);
         return cookieName + "; expires=" + fechaExpiracion.toUTCString() + "; path=/; sameSite=Strict";
     }
     existsCookie(cookieName) {
