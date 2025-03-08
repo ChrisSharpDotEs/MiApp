@@ -8,11 +8,13 @@ class CookieModalManager {
         this.acceptCookies.addEventListener('click', () => {
             document.cookie = this.setCookie('accepted-cookies=true');
         });
-        this.rejectCookies.addEventListener('click', () => {})
+        this.rejectCookies.addEventListener('click', () => {
+            document.cookie = this.setCookie('accepted-cookies=false');
+        })
     }
     setCookie(cookieName) {
         let fechaExpiracion = new Date();
-        fechaExpiracion.setDate(fechaExpiracion.getDate() + 15);
+        fechaExpiracion.setMinutes(fechaExpiracion.getMinutes() + 1);
         return cookieName + "; expires=" + fechaExpiracion.toUTCString() + "; path=/; sameSite=Strict";
     }
     existsCookie(cookieName) {

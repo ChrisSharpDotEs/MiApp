@@ -14,12 +14,16 @@ class AuthController extends BaseController
             exit;
         } else {
             $data = [
-                "title" => "MiApp | Home"
+                "title" => "MiApp | Home",
+                "page" => "login"
             ];
             return $this->view("/layouts/guest", $data);
         }
     }
 
+    public function store($request) {
+        print_r($request);
+    }
     public function authorize($request)
     {
         $email = $request['email'];

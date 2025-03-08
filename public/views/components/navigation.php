@@ -17,12 +17,16 @@
                     </li>
                     <?php if (isset($_SESSION) && array_key_exists("_token", $_SESSION)): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard" data-path-item="/dashboard">Dashboard</a>
+                            <a class="nav-link" href="/posts" data-path-item="/posts">Posts</a>
                         </li>
                     <?php endif ?>
                     <?= $dashboardLink ?? '' ?>
                 </ul>
                 <?= $logoutForm ?? ''; ?>
+                <?php if (!isset($_SESSION['_token'])): ?>
+                    <a href="/register" class="btn btn-light rounded-0 mx-2">Regístrate</a>
+                    <a href="/login" class="btn btn-outline-light rounded-0 mx-2">Iniciar sesión</a>
+                <?php endif ?>
                 <?php if (isset($_SESSION['_token'])): ?>
                     <form action="/logout" method="post">
                         <input type="hidden" name="action" value="logout" hidden>
