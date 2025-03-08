@@ -17,15 +17,15 @@ $routes = [
         "GET" => "index",
         "POST" => "authorize"
     ],
-    "/auth" => [
-        "controller" => "AuthController",
-        "POST" => "authorize"
-    ],
     "/logout" => [
         "controller" => "AuthController",
         "POST" => "logout"
     ],
-    "/dashboard" => [
+    "/register" => [
+        "controller" => "RegisterController",
+        "GET" => "index"
+    ],
+    "/posts" => [
         "controller" => "PostController",
         "GET" => "index"
     ]
