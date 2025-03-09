@@ -597,12 +597,12 @@ button:not(:disabled),
   outline: 0;
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
- :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active {
+ :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
   color: var(--bs-btn-active-color);
   background-color: var(--bs-btn-active-bg);
   border-color: var(--bs-btn-active-border-color);
 }
- :not(.btn-check) + .btn:active:focus-visible, .btn:first-child:active:focus-visible, .btn.active:focus-visible {
+ :not(.btn-check) + .btn:active:focus-visible, .btn:first-child:active:focus-visible, .btn.active:focus-visible, .btn.show:focus-visible {
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
 .btn:disabled {
@@ -784,7 +784,7 @@ button:not(:disabled),
   margin-bottom: 0;
   list-style: none;
 }
-.navbar-nav .nav-link.active {
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
   color: var(--bs-navbar-active-color);
 }
 
@@ -995,6 +995,9 @@ button:not(:disabled),
     transition: none;
   }
 }
+.modal.show .modal-dialog {
+  transform: none;
+}
 
 .modal-dialog-scrollable {
   height: calc(100% - var(--bs-modal-margin) * 2);
@@ -1139,6 +1142,11 @@ button:not(:disabled),
 
 .border-bottom {
   border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+}
+
+.border-danger {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(--bs-danger-rgb), var(--bs-border-opacity)) !important;
 }
 
 .w-100 {
@@ -1287,20 +1295,7 @@ button:not(:disabled),
 }
 .jumbotron {
   min-height: 100vh;
-  background: #111;
-  /*background-image:
-      linear-gradient(35deg,
-          hsla(0, 0%, 7%, 1),
-          80%,
-          hsla(0, 0%, 7%, 0.6)),
-      linear-gradient(transparent calc(50% - 1px),
-          #fff 1px,
-          transparent calc(50% + 1px) 100%),
-      linear-gradient(to right,
-          transparent calc(50% - 1px),
-          #fff 1px,
-          transparent calc(50% + 1px) 100%);
-  background-size: 100% 100%, 40px 40px, 40px 40px;*/
+  background-image: linear-gradient(90deg, #39c7cc, 44%, rgba(72, 163, 125, 0.3882352941));
 }
 
 main section {

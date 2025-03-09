@@ -39,6 +39,7 @@ class RegisterController extends BaseController
         $email_hasheado = hash('sha256', $salt . $email);
         print_r($userDTO);
         exit();
+        
         if ($userDTO) {
             $user = User::getUser($userDTO);
             $hashAlmacenado = $userDTO['password'];

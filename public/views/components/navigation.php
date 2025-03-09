@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-sm bg-transparent">
+    <nav class="navbar navbar-expand-sm p-3">
         <div class="container">
             <a class="navbar-brand" href="#"><?= $appName ?? '' ?></a>
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
@@ -24,8 +24,8 @@
                 </ul>
                 <?= $logoutForm ?? ''; ?>
                 <?php if (!isset($_SESSION['_token'])): ?>
-                    <a href="/register" class="btn btn-light rounded-0 mx-2">Regístrate</a>
-                    <a href="/login" class="btn btn-outline-light rounded-0 mx-2">Iniciar sesión</a>
+                    <a href="/register" class="d-none btn btn-light mx-2">Regístrate</a>
+                    <a href="/login" class="btn btn-outline-light mx-2">Iniciar sesión</a>
                 <?php endif ?>
                 <?php if (isset($_SESSION['_token'])): ?>
                     <form action="/logout" method="post">
