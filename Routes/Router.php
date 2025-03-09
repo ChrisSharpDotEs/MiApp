@@ -23,7 +23,8 @@ class Router
             ],
             "/register" => [
                 "controller" => "RegisterController",
-                "GET" => "index"
+                "GET" => "index",
+                "POST" => "store"
             ],
             "/posts" => [
                 "controller" => "PostController",

@@ -21,6 +21,7 @@ if (isset($_SESSION) && array_key_exists('error_message', $_SESSION)) {
     <meta content="" name="keywords">
     <link rel="shortcut icon" href="#" type="image/x-icon">
     <link rel="stylesheet" href="./public/css/app.css">
+    <script src="./public/js/app.js" type="module"></script>
 </head>
 
 <body data-bs-theme="dark" style="background-color: #111;">

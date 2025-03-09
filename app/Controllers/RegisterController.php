@@ -22,7 +22,39 @@ class RegisterController extends BaseController
     }
     
     public function store($request) {
-        print_r($request);
+        $email = $request['email'];
+        $password = $request['password'];
+        $confirmPassword = $request['confirmPassword'];
+        
+        $user = new User();
+        $userDTO = $user->get($email, $password);
+
+        if ($userDTO) {
+            $user = User::getUser($userDTO);
+            $hashAlmacenado = $userDTO['password'];
+            if (password_verify($password, $hashAlmacenado)) {
+                $data = [
+                    "title" => "MiApp | Home",
+                    "page" => "welcome",
+                    "message" => "¡Bienvenido " . $userDTO['name'] . "!"
+                ];
+                $_SESSION['data'] = $data;
+                $_SESSION['user_id'] = $userDTO['id'];
+                $_SESSION['_token'] = bin2hex(random_bytes(32));
+
+                $user->setToken($_SESSION['_token']);
+                header('Location: /');
+                exit();
+            } else {
+                $_SESSION['error_message'] = "Datos incorrectos.";
+                header('Location: /login');
+                exit();
+            }
+        } else {
+            $_SESSION['error_message'] = "Ha ocurrido un error inesperado";
+            header('Location: /login');
+            exit();
+        }
     }
 
     private function generateToken()
