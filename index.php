@@ -1,53 +1,28 @@
 <?php
 session_start();
-
 require_once 'vendor/autoload.php';
+include('Routes/Router.php');
+use MiApp\Routes\Router;
 
 $request = $_SERVER['REQUEST_URI'];
-
 $method = $_SERVER['REQUEST_METHOD'];
 
-$routes = [
-    "/" => [
-        "controller" => "WebController",
-        "GET" => "index"
-    ],
-    "/login" => [
-        "controller" => "AuthController",
-        "GET" => "index",
-        "POST" => "authorize"
-    ],
-    "/logout" => [
-        "controller" => "AuthController",
-        "POST" => "logout"
-    ],
-    "/register" => [
-        "controller" => "RegisterController",
-        "GET" => "index"
-    ],
-    "/posts" => [
-        "controller" => "PostController",
-        "GET" => "index"
-    ]
-];
-if (array_key_exists($request, $routes)) {
-    $controller = $routes[$request]['controller'];
-    $action = $routes[$request][$method];
+$router = new Router();
 
-    if (isset($_POST) && array_key_exists('login', $_POST)) {
-        $params = $_POST;
-    }
-} else {
-    $controller = "WebController";
-    $action = "notfound";
-}
+list($controller, $action) = $router->matchRoute($request, $method);
 
 $controllerName = ucfirst($controller);
+$controllerFile = './app/Controllers/' . $controllerName . '.php';
 
-include('./app/Controllers/' . $controllerName . '.php');
+if (file_exists($controllerFile)) {
+    include $controllerFile;
+    $controllerClass = "MiApp\\Controllers\\$controllerName";
+    $controllerInstance = new $controllerClass();
 
-$controllerName = "MiApp\\Controllers\\$controllerName";
+    $params = ($_POST && isset($_POST['login'])) ? $_POST : null;
 
-$controller = new $controllerName();
-
-$controller->$action($params ?? NULL);
+    $controllerInstance->$action($params ?? null);
+} else {
+    http_response_code(404);
+    echo "Controller not found.";
+}

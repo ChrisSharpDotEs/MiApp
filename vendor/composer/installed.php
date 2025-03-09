@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'cristian/miphpapp',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '11cd7fa4d3c15e1cf718be6da292aedbe8af7baa',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'cristian/miphpapp' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '11cd7fa4d3c15e1cf718be6da292aedbe8af7baa',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

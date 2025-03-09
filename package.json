@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build:css": "postcss public/css/app.css -o public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,5 +12,12 @@
   "description": "",
   "dependencies": {
     "bootstrap": "^5.3.3"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.0",
+    "postcss-purgecss": "^5.0.0"
   }
 }
