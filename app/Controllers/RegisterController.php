@@ -20,15 +20,25 @@ class RegisterController extends BaseController
             return $this->view("/layouts/guest", $data);
         }
     }
-    
-    public function store($request) {
+
+    public function store($request)
+    {
         $email = $request['email'];
         $password = $request['password'];
         $confirmPassword = $request['confirmPassword'];
-        
+
+        if ($password != $confirmPassword) {
+            $_SESSION['error_message'] = "Ha ocurrido un error inesperado";
+            header('Location: /login');
+            exit();
+        }
         $user = new User();
         $userDTO = $user->get($email, $password);
-
+        $email = "usuario@ejemplo.com";
+        $salt = "cadena_aleatoria_secreta";
+        $email_hasheado = hash('sha256', $salt . $email);
+        print_r($userDTO);
+        exit();
         if ($userDTO) {
             $user = User::getUser($userDTO);
             $hashAlmacenado = $userDTO['password'];

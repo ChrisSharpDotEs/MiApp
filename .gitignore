@@ -2,3 +2,4 @@
 /node_modules
 /package-lock.json
 docker-compose.yaml
+/public/css/app.css.map

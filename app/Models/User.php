@@ -23,7 +23,6 @@ class User extends DBConnection
     }
     public function get($email, $password)
     {
-        //TO-DO: the instance holds the user data
         try {
             $this->email = $email;
             $this->password = $password;
