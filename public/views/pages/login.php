@@ -2,7 +2,7 @@
     <a href="/" class="nav-link"><h1 class="fs-4 text-center"><?= $appName ?></h1></a>
     <form action="/login" method="post">
         <input type="hidden" name="_token" value="<?= session_id() ?>" hidden>
-        <input type="text" name="login" value="true" hidden>
+        <input type="text" name="auth" value="true" hidden>
         <div class="mb-3">
             <label for="emailId" class="form-label">Email</label>
             <input type="email" class="form-control shadow-sm" name="email" id="emailId" placeholder="abc@mail.com" autocomplete="email" required />

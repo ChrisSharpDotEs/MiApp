@@ -24,8 +24,8 @@ if (isset($_SESSION) && array_key_exists('error_message', $_SESSION)) {
     <script src="./public/js/app.js" type="module"></script>
 </head>
 
-<body data-bs-theme="dark" style="background-color: #111;">
-    <main class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+<body>
+    <main class="d-flex flex-column align-items-center justify-content-center min-h-screen">
         <?= $error_message ?>
         <div class="border rounded">
             <?php include("./public/views/pages/$page.php"); ?>

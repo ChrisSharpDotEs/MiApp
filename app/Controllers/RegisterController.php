@@ -3,6 +3,7 @@
 namespace MiApp\Controllers;
 
 use MiApp\Models\User;
+use MiApp\Helpers\Validator;
 
 class RegisterController extends BaseController
 {
@@ -23,25 +24,45 @@ class RegisterController extends BaseController
 
     public function store($request)
     {
+        $username = $request['username'];
         $email = $request['email'];
         $password = $request['password'];
         $confirmPassword = $request['confirmPassword'];
 
-        if ($password != $confirmPassword) {
-            $_SESSION['error_message'] = "Ha ocurrido un error inesperado";
+        if($password !== $confirmPassword) {
+            $_SESSION['error_message'] = "Las contraseñas no coinciden.";
             header('Location: /login');
-            exit();
+            exit(); 
         }
+        $isValidEmail = Validator::validateEmail($email);
+        $isValidPassword = Validator::validatePassword($password);
+
+        if(!$isValidEmail) {
+            $_SESSION['error_message'] = "El email no es válido.";
+            header('Location: /login');
+            exit(); 
+        }
+        if(!$isValidPassword){
+            $_SESSION['error_message'] = "La contraseña no es válida.";
+            header('Location: /login');
+            exit(); 
+        }
+
         $user = new User();
-        $userDTO = $user->get($email, $password);
-        $email = "usuario@ejemplo.com";
-        $salt = "cadena_aleatoria_secreta";
-        $email_hasheado = hash('sha256', $salt . $email);
-        print_r($userDTO);
-        exit();
+        if($user->exists($email)) {
+            $_SESSION['error_message'] = "El usuario ya existe.";
+            header('Location: /login');
+            exit(); 
+        }
         
-        if ($userDTO) {
-            $user = User::getUser($userDTO);
+        // Creamos el usuario
+        $user->create($username, $email, $password);
+        $user->_reconnect();
+
+        //Comprobamos que se haya creado y exista
+        $userDTO = $user->get($email);
+        
+        if($userDTO) {
             $hashAlmacenado = $userDTO['password'];
             if (password_verify($password, $hashAlmacenado)) {
                 $data = [
@@ -55,10 +76,6 @@ class RegisterController extends BaseController
 
                 $user->setToken($_SESSION['_token']);
                 header('Location: /');
-                exit();
-            } else {
-                $_SESSION['error_message'] = "Datos incorrectos.";
-                header('Location: /login');
                 exit();
             }
         } else {

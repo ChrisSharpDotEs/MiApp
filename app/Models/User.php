@@ -2,7 +2,6 @@
 
 namespace MiApp\Models;
 
-use ErrorException;
 use Exception;
 use MiApp\Models\DBConnection;
 use PDO;
@@ -21,11 +20,10 @@ class User extends DBConnection
     {
         parent::__construct();
     }
-    public function get($email, $password)
+    public function get($email)
     {
         try {
             $this->email = $email;
-            $this->password = $password;
     
             $sql = "SELECT * FROM users WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
@@ -38,6 +36,58 @@ class User extends DBConnection
               return $userDTO;
             } else {
                 $this->close();
+                return null;
+            }
+    
+        } catch (PDOException $e) {
+            $this->close();
+            return null;
+        } catch (Exception $e) {
+            $this->close();
+            return null;
+        }
+    }
+    public function create($name, $email, $password) {
+        try {
+            $salt = "rHtvTniO";
+            $securedPass = hash('sha256', $salt . $password);
+
+            var_dump($this->conn);
+            $sql = "INSERT INTO users ('name', 'email', 'password') VALUES (:name, :email, :password)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':email' => $email,
+                ':name' => $name,
+                ':password' => $securedPass
+            ]);
+    
+            $userDTO = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($userDTO) {
+              return $userDTO;
+            } else {
+                return null;
+            }
+    
+        } catch (PDOException $e) {
+            return null;
+        } catch (Exception $e) {
+            return null;
+        } finally {
+            $this->close();
+        }
+    }
+    public function exists($email) {
+        try {
+            $sql = "SELECT * FROM users WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':email' => $email]);
+    
+            $userDTO = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($userDTO) {
+              return $userDTO;
+            } else {
                 return null;
             }
     

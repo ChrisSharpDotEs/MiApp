@@ -21,11 +21,11 @@ class Router
                 "controller" => "AuthController",
                 "POST" => "logout"
             ],
-            /*"/register" => [
+            "/register" => [
                 "controller" => "RegisterController",
                 "GET" => "index",
                 "POST" => "store"
-            ],*/
+            ],
             "/posts" => [
                 "controller" => "PostController",
                 "GET" => "index"

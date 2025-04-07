@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./public/css/app.css">
 </head>
 
-<body data-bs-theme="dark" style="background-color: #111;">
+<body>
     <div class="modal-container">
         <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered"
@@ -54,20 +54,9 @@
             </div>
         </div>
     </div>
-    <div class="d-flex flex-column justify-content-between">
-        <?php include("./public/views/components/navigation.php"); ?>
+    <div class="d-flex flex-column justify-content-between min-h-screen">
         <?php include("./public/views/pages/$page.php"); ?>
-        <footer class="bg-dark py-3">
-            <div class="container-fluid">
-                <div class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4 border-top">
-                    <div class="p-2">
-                        <a href="/" class="text-decoration-none text-light">
-                            <span class="">© 2025 MiApp, Test</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <?php include("./public/views/components/footer.php") ?>
     </div>
     <script src="./public/js/app.js" type="module"></script>
 </body>

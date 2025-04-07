@@ -1,4 +1,5 @@
-<main class="bg-dark">
+<main class="bg-gradient-main">
+<?php include("./public/views/components/navigation.php"); ?>
     <section class="container py-5">
         <h1 class="fs-4">Mis Posts</h1>
         <hr>
@@ -6,7 +7,7 @@
             <div class="row">
                 <?php foreach ($posts as $post): ?>
                     <div class="col-lg-4 col-md-6 p-2">
-                        <div class="border rounded p-3 h-100 bg-dark">
+                        <div class="border rounded p-3 h-100 shadow">
                             <?php if ($post['img_url'] != '' || $post['img_url'] != NULL): ?>
                                 <img class="img-fluid rounded" src="<?= htmlspecialchars($post['img_url']) ?>" alt="Imagen de <?= htmlspecialchars($post['title']) ?>">
                             <?php endif ?>

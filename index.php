@@ -19,7 +19,7 @@ if (file_exists($controllerFile)) {
     $controllerClass = "MiApp\\Controllers\\$controllerName";
     $controllerInstance = new $controllerClass();
 
-    $params = ($_POST && isset($_POST['login'])) ? $_POST : null;
+    $params = ($_POST && isset($_POST['auth'])) ? $_POST : null;
 
     $controllerInstance->$action($params ?? null);
 } else {

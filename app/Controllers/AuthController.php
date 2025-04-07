@@ -30,7 +30,8 @@ class AuthController extends BaseController
         $password = $request['password'];
 
         $user = new User();
-        $userDTO = $user->get($email, $password);
+        $userDTO = $user->get($email);
+        
 
         if ($userDTO) {
             $user = User::getUser($userDTO);
