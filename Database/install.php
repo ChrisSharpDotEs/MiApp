@@ -102,7 +102,6 @@ class BuildDataBase extends DBConnection
             return false;
         }
     }
-
     private function insertDefaultUser()
     {
         $nombre = 'invitado';
