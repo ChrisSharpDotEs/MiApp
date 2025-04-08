@@ -36,4 +36,21 @@ class WebController extends BaseController
             return $this->view("/layouts/guest", $data);
         }
     }
+
+    public function clausules() {
+        $data = [
+            "title" => "MiApp | Condiciones de uso",
+            "appName" => "MiApp",
+            "page" => "clausule"
+        ];
+        return $this->view("/layouts/app", $data);
+    }
+    public function policy() {
+        $data = [
+            "title" => "MiApp | Política de Cookies",
+            "appName" => "MiApp",
+            "page" => "cookies"
+        ];
+        return $this->view("/layouts/app", $data);
+    }
 }

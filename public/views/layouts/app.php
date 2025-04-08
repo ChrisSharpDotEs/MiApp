@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? '' ?></title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta content="Un sitio web dedicado a los amantes de la montaña" name="description">
+    <meta content="PHP, trekking, camping" name="keywords">
     <link rel="shortcut icon" href="#" type="image/x-icon">
     <link rel="stylesheet" href="./public/css/app.css">
 </head>
@@ -44,9 +44,9 @@
                             <a href="/politica-de-cookies">Política de Cookies</a>.
                             </p>
                             <div class="d-flex justify-content-between gap-2">
-                                <button id="accept-cookies" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Aceptar todas</button>
-                                <button id="reject-cookies" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Rechazar todas</button>
-                                <button class="btn btn-primary rounded-0 d-none" data-bs-dismiss="modal">Configurar</button>
+                                <button id="accept-cookies" class="btn btn-primary text-light" data-bs-dismiss="modal">Aceptar todas</button>
+                                <button id="reject-cookies" class="btn btn-primary text-light" data-bs-dismiss="modal">Rechazar todas</button>
+                                <button class="btn btn-primary d-none" data-bs-dismiss="modal">Configurar</button>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 <?php
+
 namespace MiApp\Routes;
 
 class Router
@@ -29,6 +30,14 @@ class Router
             "/posts" => [
                 "controller" => "PostController",
                 "GET" => "index"
+            ],
+            "/clausules" => [
+                "controller" => "WebController",
+                "GET" => "clausules"
+            ],
+            "/politica-de-cookies" => [
+                "controller" => "WebController",
+                "GET" => "policy"
             ]
         ];
     }

@@ -1,18 +1,27 @@
-$primary: #2f959c;
+$primary: #EC612A;
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+* {
+    font-family: "Poppins", sans-serif;
+}
 
 body {
     min-height: 100vh;
 }
+.bg-image {
+    background-image: url("https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+
 .min-h-screen {
     min-height: 100vh;
 }
+
 .jumbotron {
-    background-image: linear-gradient(90deg, #299094, 44%, #48a37d63);
+    background-color: #f3f3db;
 }
 
 .bg-gradient-main {
-    background-image: linear-gradient(90deg, #2a9094, 44%, #48a37d63);
+    background-color: #f3f3db;
 }
 
 main {
